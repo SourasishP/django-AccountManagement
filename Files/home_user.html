@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head><title>Second Details Entry Portal | {{uname}}</title>
+{% load static %}<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+{% include "Header.html" %}
+</head>
+<body>
+<div class="show_nm_box"><div class="show_nm_left">Welcome to Second Details Entry Portal Bank Management System</div><div class="show_nm_ctr">
+<div style="margin-top:8px;">Welcome {{uname}}<br>Email: {{em}}</div></div>
+<div class="show_nm_right">Account Number: <span id="show_acc" style='color:black;'>{{acc}}</span>
+<br> Balance: <span id="show_acc" style='color:black;'>{{amt}}</span>
+</div></div>
+<div class="show_content" style="height:100%;">
+<div class="show_content_left" style="height:100%;">
+<div class="content"><a href='javascript:void(0);' onclick="javascript:show_page('profile');">Profile</a></div>
+<div class="content"><a href='javascript:void(0);' onclick="javascript:show_page('transfer');">Tranfer</a></div>
+<div class="content"><a href='javascript:void(0);' onclick="javascript:show_page('show');">Show Transactions</a></div>
+</div>
+<div class="show_content_right" style="height:100%;" id="content_right">
+<span style="float:right;"><button type="buton" onclick="window.location.href='{% url 'home' %}'">Home</button>
+<button type="buton" class="rst_show" onclick="window.location.href='{% url 'user_logout' %}'">Logout</button></span>
+</div></div>
+</body>
+<script>
+function show_page(val)
+{
+	if(val=='profile')
+		window.location.href="{% url 'user-profile' %}";
+	else if(val=='transfer')
+		window.location.href="{% url 'trnsfr' %}";
+	else if(val=='show')
+		window.location.href="{% url 'show_details' %}";
+	else
+		alert("ERROR: Please contact the administrator");
+}
+</script>
+</html>

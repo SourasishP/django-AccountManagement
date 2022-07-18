@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>{% load static %}<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<title>Second Details Entry Portal | Verify Email</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+<style>
+.show_box
+{
+	display:none;
+	background-color:#DFFF00;color:#DE3163;
+	position:fixed;width:auto;z-index:1;border-radius:10px 10px 10px 10px;
+	right:50%;margin-left:10%;bottom:15%;overflow: auto;
+}
+.show_box_contents
+{
+	padding:25px 25px;font-weight:bold;
+}
+.show_box .tmr_bar
+{
+	width:100%;height:4px;padding:none;
+	bottom:0;background-color:red;
+}
+.first_show
+{
+	width:100%;padding:17px 17px;
+	background-color:#FCF3CF;display:none;
+	color:brown;font-weight:bold;font-size:1.1em;
+}
+</style>
+</head><body>
+{% include "Header.html" %}
+<br>
+<div class="first_show" id="first_show">
+Please click on Login...
+</div>
+<form action="{% url 'verify_email' %}" method="post" id="verify_form" name="verify_form">
+{% csrf_token %}
+<div class="form_label">Email:</div>
+<input type="text" readonly id="user-email" name="user_email" value="{{em}}">
+<div class="form_label">OTP:</div>
+<input type="number" id="user_code" name="user_code" required autofocus placeholder="Enter OTP" title="Enter OTP">
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div class="show_box anmt" id="show_box"><div class="show_box_contents">
+{{msg}}
+</div><div>
+<div class="tmr_bar" id="tmr_bar"></div></div></div>
+</body>
+<script src="{% static 'js/Show_Bar.js' %}"></script>
+{% if msg|length > 0 and msg != "User Verified Successfully" %}
+<script>
+mdec_tmr_bar(35);document.getElementById('show_box').style.display='block'
+document.getElementById('email').style.border='2px solid red';
+</script>
+{% elif msg|length > 0 and msg == "User Verified Successfully" %}
+<script>
+mdec_tmr_bar(35);document.getElementById('show_box').style.display='block'
+document.getElementById('verify_form').style.display="none";document.getElementById('first_show').style.display="block";
+document.getElementById('email').style.border='2px solid red';
+</script>
+{% endif %}
+</html>

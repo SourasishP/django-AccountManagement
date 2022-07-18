@@ -1,0 +1,40 @@
+<!doctype html>
+<html>{% load static %}
+<head><head><title>Second Details Entry Portal | {{uname}}</title>
+<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+<style>
+table{
+	margin-top:10px;border-radius:10px 10px 10px 10px;
+}
+th
+{
+	font-size:1.1em;text-align:center;background-color:lemonchiffon;color:blue;height:10px;
+}
+td
+{
+	text-align:center;background-color:#FFF5EE;
+}
+</style>
+{% include "Header.html" %}</head><body>
+<div class="show_nm_box"><div class="show_nm_left">Welcome to Second Details Entry Portal Bank Management System</div><div class="show_nm_ctr">
+<div style="margin-top:8px;">Welcome {{uname}}<br>Email: {{em}}</div></div>
+<div class="show_nm_right">Account Number: <span id="show_acc" style='color:black;'>{{acc}}</span>
+<br> Balance: <span id="show_acc" style='color:black;'>{{amt}}</span>
+</div></div>
+{% if msg != "No Transactions done yet" %}
+<table cellspacing="1px" cellpadding="9px" width="100%" border="2">
+<tr><th>Transaction ID</th><th>Account Number</th><th>Type</th><th>Amount</th><th>Remarks</th><th>Date</th></tr>
+{% for trn in trn_list %}
+{% if trn.from_acc == acc %}
+<tr><td style="font-weight:bold;">{{trn.trn_id}}</td><td><font color='#F33A6A'>To</font>&emsp;&emsp;{{trn.to_acc}}</td><td style='color:#F33A6A;'>Debit</td><td>{{trn.amt}}</td><td>{{trn.remarks}}</td><td>{{trn.date}}</td></tr>
+{% else %}
+<tr><td style="font-weight:bold;">{{trn.trn_id}}</td><td><font color='#2E8B57'>From</font>&emsp;&emsp;{{trn.from_acc}}</td><td style='color:#2E8B57;'>Credit</td><td>{{trn.amt}}</td><td>{{trn.remarks}}</td><td>{{trn.date}}</td></tr>
+{% endif %}
+{% endfor %}
+</table>
+{% else %}
+<p style='margin:15px 0px 0px 5px;color:blue;font-size:1.1em;'>No Transactions done yet.</p>
+{% endif %}
+<br><center><button type="button" class="rst_show" onclick="window.location.href='{% url 'home_logged' %}'">HOME</button></center>
+</body></html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html>{% load static %}<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<head><title>{{title}}</title>
+<style>
+body{background-color:#CCFFFF;margin:0px;}
+.content-box
+{
+	margin:5px 35px 20px 35px;
+	background-color:white;
+	border-radius:5px 5px 5px 5px;flex-wrap:wrap;
+	padding:20px 20px 20px 20px;display:flex;
+	z-index:2;box-shadow:0 4px 7px 6px #B0BEC5;
+	height:auto;
+}
+.content
+{
+	box-sizing:border-box;width:50%;
+}
+.content-box .content .content-head
+{
+	font-weight:bold;
+	color:black;text-decoration:underline;
+	font-size:1.8em;text-align:center;font-family:comic sans ms;
+}
+.content-box .content .content-body
+{
+	padding: 10px 10px 10px 10px;
+	color:black;margin-top:10px;
+	font-size:1.3em;
+}
+.main-img
+{
+	right:auto;
+	border-radius:10px 10px 10px 10px;margin-top:15px;
+}
+.nav_top_img .first_img
+{
+	position:absolute;
+	width:75px;
+	height:75px;
+	left:0;
+}
+.text-body
+{
+	font-size:2em;color:brown;text-align:center;
+}
+.show
+{
+	font-size:1.8em;font-weight:bold;
+	color:#CD6155;
+	margin-top:5px;margin-left:30px;z-index:0;
+}
+.visit-text
+{
+	font-size:1em;color:#CD6155;margin-top:5px;
+	font-weight:bold;right:50px;float:right;
+}
+.anmt{
+	animation: show_text 0.843s forwards;
+}
+@keyframes show_text {
+	0% {transform: scale(0.2)}
+	100% {transform: scale(1)}
+}
+.first_down
+{
+	height:75px;
+}
+.bottom_part
+{
+	margin:10px 0px 10px 10px;
+	flex-wrap:wrap;
+	display:flex;
+	height:200px;
+}
+.bottom_part .content
+{
+	box-sizing:border-box;width:50%;color:brown;
+}
+.bottom_part .content iframe
+{
+	margin-top:10px;
+	border: 5px solid black;border-radius:5px 5px 5px 5px;width:100%;height:180px;
+}
+.bottom_part .content .contact-text-head
+{
+	font-weight:bold;
+	text-decoration:underline;
+	font-size:1.8em;text-align:center;font-family:comic sans ms;	
+}
+.bottom_part .content .contact-text-body
+{
+	font-size:1.2em;font-family:comic sans ms;margin-left:100px;margin-top:40px;color:#BA4A00;
+}
+@media screen and (max-width: 300px)
+{
+	.content_box
+	{
+		height:auto;
+	}
+	.content
+	{
+		width:100%;
+	}
+}
+</style></head>
+<body>
+{% include "Header.html" %}
+<p class="show anmt" style="position:absolute">Hi {{uname}}</p>
+<center><img src="{% static '/Photos/Details.jpg' %}" width="500px" height="300px" class="main-img" border="3">
+<div class="text-body">Welcome to {{title}}<br>Please Login</div></center>
+<div class="content-box"><div class="content"><div class="content-head">OUR VISION</div>
+<div class="content-body"><b><i>"We strive to make this page more convenient and more user friendly so that it is easy
+for the users to navigate and move forward in order to perform their task."</i></b><br><br>
+Indeed this is one of the vsison of us in order to strive and make this page more user friendly and more easier for
+the users to use without compromising on their needs.</div></div>
+<div class="content"><div class="content-head">ABOUT US</div><div class="content-body">Second Details Entry Portal is a page where
+users will be able to perform their task at ease. This will enable the users to login, upload their image, store their files
+over a secure environment and also store the users' data.<br>Here, at Second Details Entry Portal
+we believe that storage of data securely is of utmost importance and we show the users whatever data we store.
+</div></div></div>
+<script>
+var t="<?php echo $logged; ?>";
+if(t==="Logged In")
+	document.getElementById("log_first").style.width="100px";
+</script></body></html>

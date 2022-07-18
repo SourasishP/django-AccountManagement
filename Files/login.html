@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>{% load static %}<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<title>Second Details Entry Portal | Login</title>
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.show_box
+{
+	display:none;
+	background-color:#DFFF00;color:#DE3163;
+	position:fixed;width:auto;z-index:1;border-radius:10px 10px 10px 10px;
+	right:50%;margin-left:10%;bottom:15%;overflow: auto;
+}
+.show_box_contents
+{
+	padding:25px 25px;font-weight:bold;
+}
+.show_box .tmr_bar
+{
+	width:100%;height:4px;padding:none;
+	bottom:0;background-color:red;
+}
+</style>
+{% include "Header.html" %}</head>
+<body><br>
+<form method="post" action="{% url 'login1' %}">
+{% csrf_token %}
+<div class="form_label">Email:</div>
+<input type="email" id="p_email" name="p_email" required title="Enter Email" placeholder="Enter Email" autofocus>
+<button type="submit">Submit</button>
+<button type="button" class="rst_show" onclick="window.location.href='{% url 'home' %}'">Home</button>
+<br><br><a href="{% url 'register' %}" style="color:blue;font-size:1.2em;">Create Account</a>
+</form>
+<div class="show_box anmt" id="show_box"><div class="show_box_contents">
+{{msg}}
+</div><div>
+<div class="tmr_bar" id="tmr_bar"></div></div></div>
+</body>
+<script src="{% static 'js/Show_Bar.js' %}"></script>
+{% if msg|length > 0 %}
+<script>
+mdec_tmr_bar(35);document.getElementById('show_box').style.display='block'
+</script>
+{% endif %}
+</html>

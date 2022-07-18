@@ -1,0 +1,52 @@
+<!doctype html>
+<html>{% load static %}
+<head><head><title>Second Details Entry Portal | {{uname}}</title>
+<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+{% include "Header.html" %}
+</head><body>
+<div class="show_nm_box"><div class="show_nm_left">Welcome to Second Details Entry Portal Bank Management System</div><div class="show_nm_ctr">
+<div style="margin-top:8px;">Welcome {{uname}}<br>Email: {{em}}</div></div>
+<div class="show_nm_right">Account Number: <span id="show_acc" style='color:black;'>{{acc}}</span>
+<br> Balance: <span id="show_acc" style='color:black;'>{{amt}}</span>
+</div></div>
+<form method="post" action="{% url 'trnsfr' %}">
+{% csrf_token %}
+<div class="form_label">Name:</div>
+<input type="text" name="to_nm" id="to_name" placeholder="Enter Name" autofocus required title="Enter Name" autocomplete="off">
+<div class="form_label">Account Number:</div>
+<input type="password" name="snd_acc" id="snd_acc" placeholder="Enter account Number" required title="Enter Account Number">
+<div class="form_label">Re-enter Account Number:</div>
+<input type="number" name="cnf_acc" id="cnf_acc" placeholder="Re-enter account Number" required title="Re-enter Account Number" autocomplete="off">
+<div class="form_label">Amount:</div>
+<input type="number" name="snd_amt" id="snd_amt" placeholder="Enter Amount" required title="Enter Amount" step=".01" min="1" max="{{amt}}">
+<div class="form_label">Remarks:</div>
+<input type="text" name="rmks" id="rmks" placeholder="Enter Remarks" required title="Enter Remarks" autocomplete="off">
+<button type="submit" onclick="check();">Transfer</button>
+<button type="button" class="rst_show" onclick="window.location.href='{% url 'home_logged' %}'">HOME</button>
+</form><div class="show_box anmt" id="show_box"><div class="show_box_contents" id="show_box_contents">{{msg}}</div><div>
+<div class="tmr_bar" id="tmr_bar"></div></div></div>
+</body>
+<script src="{% static 'js/Show_Bar.js' %}"></script>
+<script>
+window.history.replaceState("", "", "/trnsfr");
+var msg="{{msg}}";
+if(msg!="")
+{
+	mdec_tmr_bar(35);document.getElementById('show_box').style.display='block';
+}
+var uname="{{uname}}";
+document.getElementById("rmks").maxLength=50-uname.length;
+function check()
+{
+	var snd_acc=document.getElementById('snd_acc').value;
+	var cnf_acc=document.getElementById('cnf_acc').value;
+	if(snd_acc!==cnf_acc)
+	{
+		document.getElementById('show_box_contents').innerHTML='Account Number must be same';
+		document.getElementById('snd_acc').value="";document.getElementById('cnf_acc').value="";
+		mdec_tmr_bar(35);document.getElementById('show_box').style.display='block';
+	}
+}
+</script>
+</html>

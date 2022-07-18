@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head><title>Second Details Entry Portal | {{uname}}</title>
+{% load static %}<link rel="SHORTCUT ICON" HREF="{% static 'Photos/Icon.ico' %}">
+<link rel="stylesheet" href="{% static 'Required_Files/look-style.css' %}">
+{% include "Header.html" %}
+</head>
+<body><div class="show_nm_box">User Profile &emsp;<span id="show_e_profile"><a href="javascript:void(0);" onclick="javascript:profile_change();" style="color:blue;">(Edit)</a></span></div><br>
+<center><img src="{% static '/Photos/'|add:photo %}" height="100" width="100" style="border-radius:50%;padding:0;border:2px solid black;background-color:white;"></center>
+<form action="{% url 'user-profile' %}" method="post">
+{% csrf_token %}
+<div class="form_label">Name:</div>
+<input type="text" name="uname" id="uname" disabled value="{{uname}}" style="width:96%;">
+<div class="form_label">Email:</div>
+<input type="text" name="p_email" id="p_email" disabled value="{{em}}" style="width:96%;">
+<div class="show_nm_box" style="background-color:#E6E6FA;">
+<div style="width:45%;padding:0;color:black;border:0;margin:0;">
+<div class="form_label">Account Number:</div>
+<input type="number" name="acc_show" id="acc_show" disabled value="{{acc}}" style='width:80%;'></div>
+<div style="width:45%;padding:0;color:black;border:0;margin:0;">
+<div class="form_label">Balance:</div>
+<input type="number" name="user_amt" id="user_amt" step=".01" disabled value="{{amt}}"></div>
+</div>
+<div class="show_nm_box" style="background-color:#E6E6FA;">
+<div style="width:45%;padding:0;color:black;border:0;margin:0;">
+<div class="form_label">Occupation:</div>
+<input type="text" name="user_occupation" id="user_occupation" disabled value="{{occupation}}" style='width:80%;' autocomplete="off" required placeholder="Enter Occupation"></div>
+<div style="width:45%;padding:0;color:black;border:0;margin:0;">
+<div class="form_label">Date of Birth:</div>
+<input type="date" name="user_dob" id="user_dob" disabled value="{{dob}}" required placeholder="Enter Date of Birth"></div>
+</div>
+<button type="submit" style="display:none;" id="change_profiles">Save</button>
+<button type="button" class="rst_show" onclick="window.location.href='{% url 'home_logged' %}'">HOME</button>
+</form><div class="show_box anmt" id="show_box"><div class="show_box_contents" id="show_box_contents">{{msg}}</div><div>
+<div class="tmr_bar" id="tmr_bar"></div></div></div>
+</body><script src="{% static 'js/Show_Bar.js' %}"></script>
+<script>
+var msg="{{msg}}";
+if(msg!="")
+{
+	mdec_tmr_bar(35);document.getElementById('show_box').style.display='block';
+}
+function profile_change()
+{
+	document.getElementById('change_profiles').style.display="inline-block";
+	document.getElementById('show_e_profile').style.display="none";
+	document.getElementById('user_dob').disabled=false;document.getElementById('user_occupation').disabled=false;
+}
+</script></html>
